@@ -23,6 +23,9 @@ Route::post('submit','Users@submit');
 Route::view('loginuser','loginuser');
 Route::post('submituser','LoginUsers@login');
 
+Route::get('event', 'TestController@index') -> middleware('authen');
+Route::get('job', 'TestController@job') -> middleware('authen');
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/users', 'Service@Disp') -> middleware('authen');
@@ -44,18 +47,24 @@ Route::post('editblog/submitedit','Service@editblog')-> middleware('authen');
 Route::get('deletecomment/edit/{id}','Service@vieweditcomment')-> middleware('authen');
 Route::post('deletecomment/edit/submitedit','Service@editcomment')-> middleware('authen');
 
+Route::get('larademo', function(){
+    Larademo::sayHello();
+}) -> middleware('authen');
+
 Route::get('addblogimage/{entity_id}','Service@viewaddimage')-> middleware('authen');
 Route::post('addblogimage/submitimage','Service@addimage')-> middleware('authen');
 Route::get('addblogimage/{entity_id}','Service@viewaddimage')-> middleware('authen');
 Route::get('deletecomment/addcommentimage/{entity_id}','Service@viewaddcomimage')-> middleware('authen');
 Route::post('deletecomment/addcommentimage/submitimage','Service@addimage')-> middleware('authen');
 
-Route::get('welcome/{user_name}', function($user_name) {
+Route::get('newuser/{user_name}', 'Service@welcomeuser')-> middleware('authen');
+
+Route::get('welcome/{user_name}/{email}', function($user_name, $email) {
   $to_name = 'shivam todi';
   $to_email = 'todishivam@gmail.com';
   $data = array('name' => $user_name, 'body' => "Welcome to CoalShastra!!" );
   Mail::send('mail', $data, function($message) use ($to_name, $to_email){
-      $message->to($to_email)
+      $message->to($email)
           ->subject('Welcome to CoalShastra');
   });
   echo "Email sent";

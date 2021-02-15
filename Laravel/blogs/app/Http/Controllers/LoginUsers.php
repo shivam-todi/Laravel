@@ -24,7 +24,7 @@ class LoginUsers extends Controller
         {
           $req->session()->put('user',$user->name);
           $req->session()->flash('data',"Welcome {$user->name}");
-          return redirect('/');
+          return redirect('event');
         }
         else {
           dd("Wrong Password, Please try again");

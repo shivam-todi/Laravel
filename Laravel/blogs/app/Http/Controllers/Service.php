@@ -211,4 +211,9 @@ class Service extends Controller
         $like->save();
         return redirect('/blogs');
     }
+    function welcomeuser()
+    {
+
+    }
+
 }

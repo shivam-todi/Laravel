@@ -34,7 +34,17 @@ return [
     | Supported: "session", "token"
     |
     */
-
+    // 'guards' => [
+    //     'web' => [
+    //         'driver' => 'session',
+    //         'provider' => 'users',
+    //     ],
+    //
+    //     'api' => [
+    //         'driver' => 'passport',
+    //         'provider' => 'users',
+    //     ],
+    // ],
     'guards' => [
         'web' => [
             'driver' => 'session',
@@ -42,7 +52,7 @@ return [
         ],
 
         'api' => [
-            'driver' => 'token',
+            'driver' => 'jwt',
             'provider' => 'users',
             'hash' => false,
         ],
